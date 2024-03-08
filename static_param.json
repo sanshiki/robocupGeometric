@@ -1,0 +1,28 @@
+{
+    "screen": {
+        "width": 1200,
+        "height": 900,
+        "ratio":0.08
+    },
+    "field": {
+        "pitch_length":12000,
+        "pitch_width":9000,
+        "pitch_margin":350,
+        "center_circle_r":500,
+        "penalty_area_length":3600,
+        "penalty_area_width":1800,
+        "goal_width":1800,
+        "goal_depth":180
+    },
+    "vehicle": {
+        "player_mouth_width":78,
+        "player_size":140,
+        "player_front_to_center":80,
+        "head_angle":57,
+        "player_height":144
+    },
+    "ball": {
+        "ball_size":100,
+        "ball_decay":-300
+    }
+}
