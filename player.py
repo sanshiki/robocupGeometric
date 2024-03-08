@@ -18,9 +18,16 @@ class Player:
         self.isDragging = False
         self.isTurning = False
 
-    def draw(self,screen):
+    def draw(self,screen,verbose=False):
         pg.draw.circle(screen, self.color, self.pos, self.radius)
         pgUtils.drawArrow(screen, self.pos, self.dir, self.color, 25, 2)
+
+        # verbose
+        if verbose:
+            pgUtils.drawRay(screen, self.pos, self.dir, self.color, isDotted=False)
+            pgUtils.drawRay(screen, self.pos, self.dir+pi, self.color, isDotted=True)
+            screen.blit(pg.font.Font(None, 20).render('Player', True, self.color), self.pos+geo.Polar2Vector(-pi/2, self.radius*2))
+            screen.blit(pg.font.Font(None, 20).render(str(self.pos)+' '+str(round(self.dir,2)), True, self.color), self.pos+geo.Polar2Vector(-pi/2, self.radius*3))
 
     def move(self, x, y):
         self.pos = geo.GeoPoint(x, y)

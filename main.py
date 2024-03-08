@@ -1,6 +1,7 @@
 import pygame as pg
 import configLoader
-import userInteraction
+import userInteraction as ui
+import userCreation as uc
 from field import Field
 from ball import Ball
 from player import Player
@@ -38,9 +39,9 @@ if __name__ == '__main__':
     ball.move(300, 300)
 
     # initialize user interaction
-    modeMonitor = userInteraction.InteractionModeMonitor()
-    movement = userInteraction.Movement(me, opponent, ball)
-    userCreation = userInteraction.userCreation(me, opponent, ball)
+    modeMonitor = ui.InteractionModeMonitor()
+    movement = ui.Movement(me, opponent, ball)
+    userCreation = uc.userCreation(me, opponent, ball)
 
     pg.init()
     pg.display.set_caption('Roobcup Geometry Visualizer')
@@ -60,9 +61,9 @@ if __name__ == '__main__':
 
         # main drawing part
         field.draw(screen)
-        me.draw(screen)
-        opponent.draw(screen)
-        ball.draw(screen)
+        me.draw(screen, modeMonitor.playerVerbose)
+        opponent.draw(screen, modeMonitor.playerVerbose)
+        ball.draw(screen, modeMonitor.ballVerbose)
         userCreation.draw(screen)
         modeMonitor.draw(screen)
 

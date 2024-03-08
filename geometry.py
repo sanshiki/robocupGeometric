@@ -33,7 +33,12 @@ class GeoPoint(GeoObj):
             return GeoVector(self.x - other[0], self.y - other[1], direction, length)
 
     def __eq__(self, other):
-        return self.x == other.x and self.y == other.y
+        if type(other) == GeoPoint:
+            return self.x == other.x and self.y == other.y
+        elif type(other) == tuple and len(other) == 2:
+            return self.x == other[0] and self.y == other[1]
+        else:
+            return False
 
     def __ne__(self, other):
         return self.x != other.x or self.y != other.y
@@ -70,6 +75,11 @@ class GeoPoint(GeoObj):
     def __iter__(self):
         return (self.x, self.y).__iter__()
     
+    def __str__(self) -> str:
+        display_x = round(self.x, 2)
+        display_y = round(self.y, 2)
+        return f'({display_x}, {display_y})'
+    
 
 class GeoVector(GeoObj):
     def __init__(self, *args):
@@ -104,3 +114,9 @@ class GeoVector(GeoObj):
 
 def Polar2Vector(dir, mod):
     return GeoVector(math.cos(dir) * mod, math.sin(dir) * mod)
+
+
+def isPointOnLine(point, start, end, buffer=2):
+    if (start - point).mod + (end - point).mod - (start - end).mod <= buffer:
+        return True
+    return False
